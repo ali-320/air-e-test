@@ -1,0 +1,398 @@
+
+<style>
+:root{
+  --font-sans:'Segoe UI',system-ui,-apple-system,sans-serif;
+  --color-primary:#2563eb;
+  --color-primary-hover:#1d4ed8;
+  --color-background:#f8fafc;
+  --color-background-primary:#ffffff;
+  --color-background-secondary:#f1f5f9;
+  --color-background-info:#eff6ff;
+  --color-background-success:#f0fdf4;
+  --color-background-warning:#fffbeb;
+  --color-background-danger:#fef2f2;
+  --color-text-primary:#1e293b;
+  --color-text-secondary:#64748b;
+  --color-text-info:#2563eb;
+  --color-text-success:#16a34a;
+  --color-text-warning:#d97706;
+  --color-text-danger:#dc2626;
+  --color-border:#e2e8f0;
+  --color-border-secondary:#cbd5e1;
+  --color-border-tertiary:#e2e8f0;
+  --color-border-info:#3b82f6;
+  --color-border-success:#22c55e;
+  --color-border-warning:#f59e0b;
+  --color-border-danger:#ef4444;
+  --border-radius-sm:6px;
+  --border-radius-md:8px;
+  --border-radius-lg:12px;
+  --shadow-sm:0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md:0 4px 6px -1px rgba(0,0,0,0.1);
+  --shadow-lg:0 10px 15px -3px rgba(0,0,0,0.1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);background:var(--color-background);color:var(--color-text-primary);line-height:1.6}
+#app{padding:2rem 1rem;max-width:900px;margin:0 auto;min-height:100vh}
+.screen{display:none}
+.screen.active{display:block}
+.hero{text-align:center;padding:3rem 2rem;background:linear-gradient(135deg,#1e3a8a 0%,#3b82f6 100%);border-radius:var(--border-radius-lg);color:#fff;margin-bottom:2rem;box-shadow:var(--shadow-lg)}
+.hero h1{font-size:28px;font-weight:700;margin-bottom:8px;letter-spacing:-0.02em}
+.hero .sub{font-size:15px;opacity:0.9;margin-bottom:2rem;line-height:1.6}
+.hero .meta-grid{background:rgba(255,255,255,0.15);border-radius:var(--border-radius-md);padding:16px;display:inline-flex;gap:24px;margin-bottom:0}
+.hero .meta-card{text-align:center}
+.hero .meta-val{font-size:22px;font-weight:700}
+.hero .meta-lbl{font-size:11px;opacity:0.85;text-transform:uppercase;letter-spacing:0.05em}
+.hero .prog-row{background:rgba(255,255,255,0.2);border-radius:var(--border-radius-md);padding:12px 16px;margin-top:20px;display:flex;align-items:center;gap:12px;justify-content:center}
+.hero label{font-size:14px;font-weight:500}
+.hero select{padding:10px 16px;border-radius:var(--border-radius-sm);border:1px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.95);font-size:14px;min-width:200px;cursor:pointer}
+.hero select:focus{outline:none;border-color:#fff;box-shadow:0 0 0 3px rgba(255,255,255,0.3)}
+.hero .start-btn{background:#fff;color:#1e3a8a;font-weight:600;padding:14px 32px;border-radius:var(--border-radius-md);border:none;font-size:15px;cursor:pointer;margin-top:20px;transition:transform 0.2s,box-shadow 0.2s}
+.hero .start-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.meta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:1.5rem}
+.meta-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:16px;text-align:center}
+.meta-val{font-size:22px;font-weight:600;color:var(--color-text-primary)}
+.meta-lbl{font-size:11px;color:var(--color-text-secondary);margin-top:4px;text-transform:uppercase;letter-spacing:0.05em}
+.prog-row{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem}
+.prog-row label{font-size:14px;color:var(--color-text-secondary);white-space:nowrap;font-weight:500}
+select{flex:1;padding:10px 14px;border:1px solid var(--color-border);border-radius:var(--border-radius-md);font-size:14px;background:var(--color-background-primary);cursor:pointer}
+select:focus{outline:none;border-color:var(--color-primary);box-shadow:0 0 0 3px rgba(37,99,235,0.1)}
+button.start-btn{display:block;width:100%;padding:14px;font-size:15px;font-weight:600;cursor:pointer;margin-top:12px;background:var(--color-primary);color:#fff;border:none;border-radius:var(--border-radius-md);transition:background 0.2s,transform 0.2s}
+button.start-btn:hover{background:var(--color-primary-hover);transform:translateY(-1px)}
+button{font-family:var(--font-sans)}
+.test-wrap{display:grid;grid-template-columns:1fr 220px;gap:20px;padding:0 0 1rem}
+@media(max-width:700px){.test-wrap{grid-template-columns:1fr}}
+.q-card{background:var(--color-background-primary);border:1px solid var(--color-border);border-radius:var(--border-radius-lg);padding:1.5rem;box-shadow:var(--shadow-sm)}
+.q-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px}
+.tag{font-size:11px;padding:4px 12px;border-radius:20px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em}
+.tag-en{background:var(--color-background-info);color:var(--color-text-info)}
+.tag-ma{background:var(--color-background-warning);color:var(--color-text-warning)}
+.tag-ph{background:var(--color-background-success);color:var(--color-text-success)}
+.tag-ar{background:#f3e8ff;color:#7c3aed}
+.tag-an{background:var(--color-background-danger);color:var(--color-text-danger)}
+.q-num{font-size:13px;color:var(--color-text-secondary);font-weight:500}
+.passage{background:var(--color-background-secondary);border-left:4px solid var(--color-primary);padding:16px 20px;font-size:14px;color:var(--color-text-secondary);line-height:1.8;margin-bottom:16px;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0}
+.q-text{font-size:16px;color:var(--color-text-primary);line-height:1.7;margin-bottom:18px;font-weight:500}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{display:flex;align-items:center;gap:12px;padding:14px 18px;border:1.5px solid var(--color-border);border-radius:var(--border-radius-md);cursor:pointer;font-size:14px;color:var(--color-text-primary);transition:all 0.2s;background:var(--color-background-primary)}
+.opt:hover{background:var(--color-background-secondary);border-color:var(--color-border-secondary);transform:translateX(4px)}
+.opt.selected{background:var(--color-background-info);border-color:var(--color-border-info);color:var(--color-text-info)}
+.opt.correct{background:var(--color-background-success);border-color:var(--color-border-success);color:var(--color-text-success);transform:translateX(4px)}
+.opt.wrong{background:var(--color-background-danger);border-color:var(--color-border-danger);color:var(--color-text-danger);transform:translateX(4px)}
+.opt-ltr{width:28px;height:28px;border-radius:50%;background:var(--color-background-secondary);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0;color:var(--color-text-secondary)}
+.opt.selected .opt-ltr,.opt.correct .opt-ltr,.opt.wrong .opt-ltr{background:rgba(255,255,255,0.4);color:inherit}
+.explanation{margin-top:16px;padding:14px 18px;background:var(--color-background-success);border:1px solid var(--color-border-success);border-radius:var(--border-radius-md);font-size:13px;color:var(--color-text-success);line-height:1.7;display:none}
+.explanation.show{display:block}
+.expl-label{font-weight:600;margin-bottom:6px;font-size:12px;letter-spacing:0.03em;text-transform:uppercase}
+.nav-row{display:flex;gap:10px;margin-top:16px;justify-content:space-between;flex-wrap:wrap}
+.nav-row button{padding:10px 18px;font-size:13px;cursor:pointer;border-radius:var(--border-radius-md);border:1px solid var(--color-border);background:var(--color-background-primary);color:var(--color-text-primary);font-weight:500;transition:all 0.2s}
+.nav-row button:hover{background:var(--color-background-secondary);border-color:var(--color-border-secondary)}
+.nav-row button:disabled{opacity:0.5;cursor:not-allowed}
+#btn-submit{background:var(--color-primary);color:#fff;border-color:var(--color-primary)}
+#btn-submit:hover{background:var(--color-primary-hover)}
+.sidebar{display:flex;flex-direction:column;gap:14px}
+.s-card{background:var(--color-background-primary);border:1px solid var(--color-border);border-radius:var(--border-radius-lg);padding:16px;box-shadow:var(--shadow-sm)}
+.s-title{font-size:11px;color:var(--color-text-secondary);letter-spacing:0.08em;margin-bottom:10px;font-weight:600;text-transform:uppercase}
+.pbar-wrap{background:var(--color-background-secondary);border-radius:6px;height:8px;overflow:hidden}
+.pbar-fill{height:100%;background:linear-gradient(90deg,var(--color-primary),#60a5fa);border-radius:6px;transition:width 0.4s ease}
+.p-lbl{display:flex;justify-content:space-between;font-size:12px;color:var(--color-text-secondary);margin-top:6px}
+.timer-disp{font-size:28px;font-weight:700;color:var(--color-text-primary);text-align:center;padding:8px 0;font-variant-numeric:tabular-nums}
+.timer-disp.warn{color:var(--color-text-danger);animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.6}}
+.q-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.qdot{aspect-ratio:1;border-radius:var(--border-radius-sm);background:var(--color-background-secondary);border:1.5px solid var(--color-border);display:flex;align-items:center;justify-content:center;font-size:11px;cursor:pointer;color:var(--color-text-secondary);font-weight:600;transition:all 0.2s}
+.qdot:hover{background:var(--color-background-primary);border-color:var(--color-primary);transform:scale(1.1)}
+.qdot.answered{background:var(--color-background-info);border-color:var(--color-border-info);color:var(--color-text-info)}
+.qdot.current{background:var(--color-primary);color:#fff;border-color:var(--color-primary);transform:scale(1.1)}
+.qdot.correct{background:var(--color-background-success);border-color:var(--color-border-success);color:var(--color-text-success)}
+.qdot.wrong{background:var(--color-background-danger);border-color:var(--color-border-danger);color:var(--color-text-danger)}
+.qdot.skipped{background:var(--color-background-warning);border-color:var(--color-border-warning);color:var(--color-text-warning)}
+.result-wrap{max-width:560px;margin:0 auto;padding:1rem 0}
+.score-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:1.5rem 0}
+.sc{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:16px;text-align:center}
+.sc-val{font-size:24px;font-weight:700}
+.sc-lbl{font-size:11px;color:var(--color-text-secondary);margin-top:4px;text-transform:uppercase;letter-spacing:0.05em}
+.merit-box{background:linear-gradient(135deg,#1e3a8a 0%,#3b82f6 100%);border-radius:var(--border-radius-lg);padding:20px;margin:16px 0;text-align:center;color:#fff}
+.merit-box h3{font-size:12px;font-weight:600;opacity:0.9;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.05em}
+.merit-formula{font-size:11px;opacity:0.75;margin-bottom:10px}
+.merit-val{font-size:36px;font-weight:700}
+.sb-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.sb-lbl{font-size:12px;color:var(--color-text-secondary);width:100px;flex-shrink:0;font-weight:500}
+.sb-wrap{flex:1;background:var(--color-background-secondary);border-radius:4px;height:8px;overflow:hidden}
+.sb-bar{height:100%;border-radius:4px;transition:width 0.5s ease}
+.sb-num{font-size:12px;color:var(--color-text-secondary);width:40px;text-align:right;font-weight:500}
+.res-actions{display:flex;gap:10px;margin-top:20px;justify-content:center;flex-wrap:wrap}
+.res-actions button{padding:12px 24px;font-size:14px;cursor:pointer;border-radius:var(--border-radius-md);border:1px solid var(--color-border);background:var(--color-background-primary);color:var(--color-text-primary);font-weight:500;transition:all 0.2s}
+.res-actions button:hover{background:var(--color-background-secondary);transform:translateY(-2px)}
+.res-actions button:first-child{background:var(--color-primary);color:#fff;border-color:var(--color-primary)}
+.res-actions button:first-child:hover{background:var(--color-primary-hover)}
+.badge-row{text-align:center;margin-bottom:16px}
+.badge-icon{font-size:48px;display:block;margin-bottom:8px}
+.badge-title{font-size:22px;font-weight:700;color:var(--color-text-primary)}
+.badge-sub{font-size:14px;color:var(--color-text-secondary);margin-top:6px}
+.score-big{font-size:56px;font-weight:700;color:var(--color-text-primary);text-align:center;margin:12px 0 6px;letter-spacing:-0.02em}
+.score-den{font-size:15px;color:var(--color-text-secondary);text-align:center;margin-bottom:16px}
+.review-hint{font-size:13px;color:var(--color-text-secondary);text-align:center;margin-top:12px;padding:12px 16px;background:var(--color-background-secondary);border-radius:var(--border-radius-md)}
+</style>
+
+<div id="app">
+
+<div class="screen active" id="s-welcome">
+  <div class="hero">
+    <h1>Air University Entry Test Simulator</h1>
+    <p class="sub">Practice with real AU-CBT question patterns.<br>Choose your program and start a timed session.</p>
+    <div class="meta-grid">
+      <div class="meta-card"><div class="meta-val">25</div><div class="meta-lbl">Questions</div></div>
+      <div class="meta-card"><div class="meta-val">30m</div><div class="meta-lbl">Duration</div></div>
+      <div class="meta-card"><div class="meta-val">50%</div><div class="meta-lbl">Test weight</div></div>
+      <div class="meta-card"><div class="meta-val">+4/0</div><div class="meta-lbl">Marking</div></div>
+    </div>
+    <div class="prog-row">
+      <label>Program:</label>
+      <select id="prog-sel">
+        <option value="bscs">BS Computer Science / BSIT</option>
+        <option value="bba">BBA / BS Accounting &amp; Finance</option>
+      </select>
+    </div>
+    <button class="start-btn" onclick="startTest()">Start test</button>
+  </div>
+</div>
+
+<div class="screen" id="s-test">
+  <div class="test-wrap">
+    <div>
+      <div class="q-card" id="q-card"></div>
+      <div class="nav-row">
+        <button id="btn-prev" onclick="nav(-1)">← Prev</button>
+        <button id="btn-skip" onclick="skip()">Skip</button>
+        <button id="btn-submit" onclick="confirmSubmit()">Submit test</button>
+        <button id="btn-next" onclick="nav(1)">Next →</button>
+      </div>
+    </div>
+    <div class="sidebar">
+      <div class="s-card">
+        <div class="s-title">Time remaining</div>
+        <div class="timer-disp" id="timer">30:00</div>
+      </div>
+      <div class="s-card">
+        <div class="s-title">Progress</div>
+        <div class="pbar-wrap"><div class="pbar-fill" id="pbar" style="width:0%"></div></div>
+        <div class="p-lbl"><span id="p-ans">0 answered</span><span id="p-tot">25 total</span></div>
+      </div>
+      <div class="s-card">
+        <div class="s-title">Questions</div>
+        <div class="q-grid" id="q-grid"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="screen" id="s-result">
+  <div class="result-wrap" id="result-content"></div>
+</div>
+
+</div>
+
+<script>
+const QB={
+bscs:[
+{sec:'English',tag:'tag-en',pass:'While most desert animals will drink water if confronted with it, for many of them the opportunity never comes. Yet all living things must have water, or they will expire. The herbivores find it in desert plants. The carnivores slake their thirst with the flesh and blood of living prey. One of the most remarkable adjustments has been made by the tiny kangaroo rat, who not only lives without drinking but also subsists on a diet of dry seeds containing about 5% free water. Like other animals, it manufactures water in its body by metabolic conversion of carbohydrates, but conserves it with remarkable parsimony.',q:'What is the main idea of the passage?',opts:['The kangaroo rat is uniquely suited to desert life','Animals need water to exist in the desert','Herbivores and carnivores live together in the desert','Animals\' metabolic systems are complex'],ans:0,exp:'The passage focuses on how the kangaroo rat has uniquely adapted to survive in the desert without drinking water, subsisting on dry seeds and conserving moisture — making it the central subject and main idea.'},
+{sec:'English',tag:'tag-en',pass:null,q:'Which of the following is NOT a source of water for desert animals (from the passage)?',opts:['Desert plants','Metabolic conversion of carbohydrates','Blood of other animals','Streams'],ans:3,exp:'The passage mentions plants (herbivores), blood/flesh (carnivores), and metabolic conversion of carbohydrates as water sources. Streams are never mentioned — desert animals rarely encounter standing water.'},
+{sec:'English',tag:'tag-en',pass:null,q:'The object of life is the ___ of men and women.',opts:['Development','Lives','Population','Competition'],ans:0,exp:'"Development" fits grammatically and contextually — the sentence describes life\'s purpose as developing human potential. "Lives" and "Population" are nouns that don\'t complete the phrase meaningfully, and "Competition" changes the meaning.'},
+{sec:'English',tag:'tag-en',pass:null,q:'The time is not far when English will be ___ by Urdu.',opts:['Transformed','Replaced','Defeated','Changed'],ans:1,exp:'"Replaced by" is the correct collocation when one thing takes the place of another. You replace one language with another. "Transformed by" means altered, not substituted. "Defeated" and "Changed" don\'t fit the idea of one language overtaking another.'},
+{sec:'English',tag:'tag-en',pass:null,q:'Antonym of INDUSTRIOUS:',opts:['Stupid','Harsh','Indolent','Radical'],ans:2,exp:'"Industrious" means hardworking and diligent. Its direct antonym is "Indolent," which means lazy and unwilling to work. "Stupid" relates to intelligence, "Harsh" to attitude, and "Radical" to viewpoint — none are opposites of industrious.'},
+{sec:'English',tag:'tag-en',pass:null,q:'Antonym of MAGNIFY:',opts:['Forgive','Comprehend','Extract','Diminish'],ans:3,exp:'"Magnify" means to enlarge or make something seem greater. Its antonym is "Diminish," which means to make smaller or reduce. "Forgive," "Comprehend," and "Extract" are unrelated in meaning.'},
+{sec:'English',tag:'tag-en',pass:null,q:'Synonym of VIGOROUS:',opts:['Fragile','Strong','Unimposing','Sensible'],ans:1,exp:'"Vigorous" means full of energy and strength, making "Strong" the closest synonym. "Fragile" is an antonym. "Unimposing" means modest/unremarkable, and "Sensible" relates to judgment — neither match vigorous.'},
+{sec:'English',tag:'tag-en',pass:null,q:'Analogy — BOOK : COVER. Choose the pair with the same relationship.',opts:['Wall : Clock','Mobile : Tone','Body : Clothes','Sea : Water'],ans:2,exp:'A cover protects/encloses a book. Similarly, clothes cover/enclose the body. "Wall : Clock" is containment vs. attachment. "Mobile : Tone" is a device and its feature. "Sea : Water" is a whole and its substance — not an enclosure relationship.'},
+{sec:'English',tag:'tag-en',pass:null,q:'Analogy — MASON : WALL. Choose the pair with the same relationship.',opts:['Fisherman : Trout','Author : Book','Congressman : Senator','Sculptor : Roof'],ans:1,exp:'A mason builds a wall — the relationship is craftsperson : their created product. An author writes/creates a book — the same relationship. A fisherman catches trout (not creates it). A congressman is not a senator\'s creator. A sculptor creates statues, not roofs.'},
+{sec:'English',tag:'tag-en',pass:null,q:'He is the friend ___ I trust most.',opts:['which','who','him','whom'],ans:3,exp:'"Whom" is the correct object pronoun here. The friend is the object of "trust" — "I trust whom." A helpful trick: if you can replace with "him/her" use whom, if "he/she" use who. "I trust him most" → "whom." "Which" is for things, not people.'},
+{sec:'Mathematics',tag:'tag-ma',pass:null,q:'If f(x) = x² − 4, what is f(3)?',opts:['5','9','13','−1'],ans:0,exp:'Substitute x = 3: f(3) = 3² − 4 = 9 − 4 = 5. A common mistake is computing 3² as 6 instead of 9 (squaring vs doubling).'},
+{sec:'Mathematics',tag:'tag-ma',pass:null,q:'Solve for x: 3x − 7 = 14',opts:['5','7','9','21'],ans:1,exp:'Add 7 to both sides: 3x = 21. Divide both sides by 3: x = 7. Check: 3(7) − 7 = 21 − 7 = 14 ✓'},
+{sec:'Mathematics',tag:'tag-ma',pass:null,q:'One integer is four times another. Their sum is 35. What is the lesser integer?',opts:['7','14','28','None of these'],ans:0,exp:'Let the smaller integer = x, the larger = 4x. Then x + 4x = 5x = 35, so x = 7. The lesser integer is 7. Check: 7 + 28 = 35 ✓'},
+{sec:'Mathematics',tag:'tag-ma',pass:null,q:'A right-angled triangle has base 8 and perpendicular 6. What is the hypotenuse?',opts:['12','10','14','11'],ans:1,exp:'Using the Pythagorean theorem: h² = 8² + 6² = 64 + 36 = 100, so h = √100 = 10. This is the classic 3-4-5 Pythagorean triple scaled by 2 (6-8-10).'},
+{sec:'Mathematics',tag:'tag-ma',pass:null,q:'Area of a square field is 400 m². Cost of boundary wall at Rs 250 per meter?',opts:['Rs 10,000','Rs 15,000','Rs 20,000','Rs 5,000'],ans:2,exp:'Side of square = √400 = 20 m. Perimeter (boundary) = 4 × 20 = 80 m. Cost = 80 × 250 = Rs 20,000.'},
+{sec:'Mathematics',tag:'tag-ma',pass:null,q:'How many elements are in the power set of a set with 3 elements?',opts:['3','6','8','9'],ans:2,exp:'The power set of a set with n elements has 2ⁿ elements. For n = 3: 2³ = 8. This includes the empty set and the set itself. E.g., for {a,b,c}: {}, {a}, {b}, {c}, {a,b}, {a,c}, {b,c}, {a,b,c} = 8 subsets.'},
+{sec:'Mathematics',tag:'tag-ma',pass:null,q:'Solve: 2x + 5 = 3x − 8',opts:['13','−13','3','−3'],ans:0,exp:'Rearrange: 5 + 8 = 3x − 2x → 13 = x. So x = 13. Check: 2(13)+5 = 31, and 3(13)−8 = 39−8 = 31 ✓'},
+{sec:'Mathematics',tag:'tag-ma',pass:null,q:'If log₁₀(100) = x, then x equals:',opts:['1','2','10','100'],ans:1,exp:'log₁₀(100) asks: "10 to what power equals 100?" Since 10² = 100, x = 2. Remember: log₁₀(10) = 1, log₁₀(100) = 2, log₁₀(1000) = 3.'},
+{sec:'Physics',tag:'tag-ph',pass:null,q:'A man walks A→B at 1.0 m/s, returns at 1.5 m/s. Average speed for the round trip?',opts:['0.33 m/s','1.20 m/s','1.25 m/s','2.50 m/s'],ans:1,exp:'Average speed for equal distances = 2v₁v₂/(v₁+v₂) = 2(1.0)(1.5)/(1.0+1.5) = 3.0/2.5 = 1.2 m/s. Note: you cannot simply average 1.0 and 1.5 to get 1.25 because the man spends more time at the slower speed.'},
+{sec:'Physics',tag:'tag-ph',pass:null,q:'A net force of 10 N gives 5.0 m/s² acceleration. What force gives 1.0 m/s²?',opts:['1.0 N','2.0 N','5.0 N','50 N'],ans:1,exp:'From F = ma: m = F/a = 10/5 = 2 kg. For a = 1.0 m/s²: F = ma = 2 × 1.0 = 2.0 N. The mass stays constant — only force and acceleration change.'},
+{sec:'Physics',tag:'tag-ph',pass:null,q:'The product of mass and velocity is called:',opts:['Acceleration','Moment Arm','Negative Acceleration','Momentum'],ans:3,exp:'By definition, linear momentum p = mv (mass × velocity). Acceleration is rate of change of velocity. Moment arm relates to torque. "Negative acceleration" is deceleration — none of these equal mass × velocity.'},
+{sec:'Physics',tag:'tag-ph',pass:null,q:'Which of the following is a vector quantity?',opts:['Mass','Temperature','Displacement','Speed'],ans:2,exp:'Vector quantities have both magnitude and direction. Displacement specifies how far and in which direction. Mass and temperature are scalars (magnitude only). Speed is the magnitude of velocity — a scalar. Displacement\'s vector counterpart, velocity, differs from speed precisely because of direction.'},
+{sec:'Physics',tag:'tag-ph',pass:null,q:'A ball dropped from rest falls for 3 seconds. How far? (g = 10 m/s²)',opts:['30 m','45 m','60 m','90 m'],ans:1,exp:'Using s = ut + ½gt²: u = 0 (dropped from rest), so s = ½ × 10 × 3² = 5 × 9 = 45 m. A common mistake is using s = gt² = 10 × 9 = 90, forgetting the ½ factor.'},
+{sec:'Analytical',tag:'tag-an',pass:null,q:'All Bloops are Razzies. All Razzies are Lazzies. Therefore all Bloops are definitely:',opts:['Razzies only','Lazzies','Neither','Cannot determine'],ans:1,exp:'This is a syllogism. If every Bloop is a Razzie, and every Razzie is a Lazzie, then by transitivity every Bloop must also be a Lazzie. Think of it as: Bloops ⊂ Razzies ⊂ Lazzies, so Bloops ⊂ Lazzies.'},
+{sec:'Analytical',tag:'tag-an',pass:null,q:'A clock shows 3:15. What is the angle between the hour and minute hands?',opts:['0°','7.5°','15°','22.5°'],ans:1,exp:'At 3:15, the minute hand is at 90° (pointing to 3). The hour hand moves 0.5° per minute. At 3:00 it is at 90°; by 3:15 it has moved 15 × 0.5° = 7.5° further, so it is at 97.5°. The angle between the hands = 97.5° − 90° = 7.5°.'}
+],
+bba:[
+{sec:'English',tag:'tag-en',pass:'While most desert animals will drink water if confronted with it, for many of them the opportunity never comes. Yet all living things must have water, or they will expire. The herbivores find it in desert plants. The carnivores slake their thirst with the flesh and blood of living prey. One of the most remarkable adjustments has been made by the tiny kangaroo rat, who not only lives without drinking but also subsists on a diet of dry seeds containing about 5% free water.',q:'According to the passage, what does the kangaroo rat subsist on?',opts:['Other animals','Dry seeds','Cactus water','Insects'],ans:1,exp:'The passage explicitly states the kangaroo rat "subsists on a diet of dry seeds containing about 5% free water." The other options are not mentioned in relation to the kangaroo rat.'},
+{sec:'English',tag:'tag-en',pass:null,q:'Antonym of MOURNFUL:',opts:['Informal','Sympathetic','Appropriate','Joyous'],ans:3,exp:'"Mournful" means feeling or expressing sadness or grief. Its direct opposite is "Joyous" — full of happiness and delight. "Sympathetic" is related but not opposite (you can be both mournful and sympathetic). "Informal" and "Appropriate" relate to conduct, not emotion.'},
+{sec:'English',tag:'tag-en',pass:null,q:'Synonym of STUNNED:',opts:['Enthusiastic','Worried','Astounded','Sacked'],ans:2,exp:'"Stunned" means shocked or overwhelmed with surprise. "Astounded" is a perfect synonym — both convey a state of shock/amazement. "Enthusiastic" means eager, "Worried" means anxious, and "Sacked" means dismissed — none match.'},
+{sec:'English',tag:'tag-en',pass:null,q:'Synonym of EMPHASIZE:',opts:['Suspended','Universalize','Enlighten','Stress'],ans:3,exp:'"Emphasize" means to give special importance to something. "Stress" is an exact synonym in this context — both mean to highlight or underline importance. "Enlighten" means to inform, "Suspended" means halted, and "Universalize" means to make universal.'},
+{sec:'English',tag:'tag-en',pass:null,q:'Analogy — DOG : CAT. Choose the pair with the same relationship.',opts:['Spoon : Dish','Evening : Noon','Peacock : Snake','Buffalo : Ox'],ans:3,exp:'A dog and cat are both common domestic/familiar animals of different species belonging to the same general category (pets/animals). Similarly, buffalo and ox are both large domesticated working animals of different species in the same category. The others pair unrelated categories.'},
+{sec:'English',tag:'tag-en',pass:null,q:'However honest he ___, I do not trust him.',opts:['might be','could be','would','may be'],ans:0,exp:'"However honest he might be" uses the correct subjunctive/conditional structure. "Might be" expresses a hypothetical possibility — the speaker is conceding he could possibly be honest. "Could be" also works in speech but "might be" is the textbook answer for this concessive construction. "Would" lacks "be" and is incomplete. "May be" is possible but weaker.'},
+{sec:'English',tag:'tag-en',pass:null,q:'He ran ___.',opts:['quick','quickly','so quickly','so quick'],ans:2,exp:'"Ran" is a verb and must be modified by an adverb, not an adjective — so "quick" is wrong. "So quickly" is the answer because "so" intensifies the adverb, giving the sentence emphasis and completeness. "Quickly" alone is grammatically correct but "so quickly" is the intended answer in the AU pattern for this sentence.'},
+{sec:'English',tag:'tag-en',pass:null,q:'Asma is a very ___ student — she always completes work before others.',opts:['Intelligent','Industrious','Honest','Respectable'],ans:1,exp:'The clue is "always completes work before others" — this describes a hardworking, diligent person. "Industrious" means hardworking/diligent, which perfectly matches the context. "Intelligent" relates to ability, "Honest" to truthfulness, "Respectable" to character — none explain completing work early.'},
+{sec:'English',tag:'tag-en',pass:null,q:'Choose the correctly spelled word:',opts:['Recieve','Occassion','Necessary','Accomodate'],ans:2,exp:'"Necessary" is correct. Common spelling rule: one Collar, two Socks — one "c" and two "s"s. "Recieve" breaks the "i before e except after c" rule (should be "Receive"). "Occassion" has an extra "s" (correct: Occasion). "Accomodate" is missing an "m" (correct: Accommodate).'},
+{sec:'English',tag:'tag-en',pass:null,q:'The manager ___ the meeting when all members arrived.',opts:['begin','begun','began','beginning'],ans:2,exp:'"Began" is the simple past tense of "begin," used for a completed action in the past. "Begin" is present tense, "Begun" requires a helping verb (had begun), and "Beginning" is a gerund/participle — none fit a simple past statement.'},
+{sec:'English',tag:'tag-en',pass:null,q:'Antonym of VERBOSE:',opts:['Talkative','Concise','Eloquent','Redundant'],ans:1,exp:'"Verbose" means using more words than necessary — long-winded. Its antonym is "Concise," meaning brief and to the point. "Talkative" is close in meaning to verbose. "Eloquent" means well-spoken. "Redundant" means unnecessarily repetitive — also close in meaning, not opposite.'},
+{sec:'English',tag:'tag-en',pass:null,q:'Synonym of AMELIORATE:',opts:['Worsen','Improve','Maintain','Destroy'],ans:1,exp:'"Ameliorate" means to make something bad better or less severe — it is a formal word for improve. "Improve" is the direct synonym. "Worsen" is the antonym. "Maintain" means keep the same, "Destroy" means eliminate completely.'},
+{sec:'English',tag:'tag-en',pass:null,q:'Analogy — PEN : WRITER. Choose the pair with the same relationship.',opts:['Stage : Actor','Brush : Painter','Canvas : Art','Gallery : Museum'],ans:1,exp:'A pen is the primary tool used by a writer to create their work. Similarly, a brush is the primary tool used by a painter. "Stage : Actor" reverses the relationship (the stage is where the actor works, not their tool). "Canvas : Art" is material to output, not tool to creator.'},
+{sec:'English',tag:'tag-en',pass:null,q:'She is one of the most ___ executives in the company.',opts:['efficiency','efficient','efficiencies','efficiented'],ans:1,exp:'After "most" we need an adjective to modify the noun "executives." "Efficient" is the adjective form. "Efficiency" and "efficiencies" are nouns. "Efficiented" is not a real word. Rule: most + adjective (most efficient, most capable, most experienced).'},
+{sec:'Arithmetic',tag:'tag-ar',pass:null,q:'Money divided A:B = 4:5. B\'s share is Rs 1350. What does A get?',opts:['Rs 1,080','Rs 2,430','Rs 9,730','Rs 1,150'],ans:0,exp:'B\'s ratio part = 5. Each part = 1350 ÷ 5 = Rs 270. A\'s share = 4 × 270 = Rs 1,080. Alternatively: A/B = 4/5, so A = (4/5) × 1350 = Rs 1,080.'},
+{sec:'Arithmetic',tag:'tag-ar',pass:null,q:'One integer is four times another. Sum is 35. What is the lesser integer?',opts:['7','14','28','None of these'],ans:0,exp:'Let the lesser integer = x, greater = 4x. x + 4x = 5x = 35, so x = 7. The lesser is 7 and the greater is 28. Verify: 7 + 28 = 35 ✓'},
+{sec:'Arithmetic',tag:'tag-ar',pass:null,q:'40% of first number = 60% of second. Ratio of first to second?',opts:['2:3','3:2','4:6','2:4'],ans:1,exp:'0.4 × A = 0.6 × B → A/B = 0.6/0.4 = 6/4 = 3/2. So first : second = 3:2. Think of it this way: since the first number contributes only 40% to equal 60% of the second, it must be larger to compensate.'},
+{sec:'Arithmetic',tag:'tag-ar',pass:null,q:'What is 15% of 240?',opts:['30','36','40','45'],ans:1,exp:'15% of 240 = (15/100) × 240 = 0.15 × 240 = 36. Quick method: 10% of 240 = 24, 5% = 12, so 15% = 24 + 12 = 36.'},
+{sec:'Arithmetic',tag:'tag-ar',pass:null,q:'Bought at Rs 800, sold at Rs 1000. Profit %?',opts:['20%','25%','30%','15%'],ans:1,exp:'Profit = 1000 − 800 = Rs 200. Profit % = (Profit/Cost) × 100 = (200/800) × 100 = 25%. Note: profit % is always calculated on cost price, not selling price.'},
+{sec:'Arithmetic',tag:'tag-ar',pass:null,q:'x + y = 10 and x − y = 4. What is x?',opts:['3','5','7','9'],ans:2,exp:'Add both equations: (x+y) + (x−y) = 10 + 4 → 2x = 14 → x = 7. Then y = 10 − 7 = 3. Check: x − y = 7 − 3 = 4 ✓'},
+{sec:'Arithmetic',tag:'tag-ar',pass:null,q:'Area of square field is 400 m². Cost of boundary wall at Rs 250/m?',opts:['Rs 10,000','Rs 15,000','Rs 20,000','Rs 5,000'],ans:2,exp:'Side = √400 = 20 m. Perimeter = 4 × 20 = 80 m. Cost = 80 × Rs 250 = Rs 20,000.'},
+{sec:'Arithmetic',tag:'tag-ar',pass:null,q:'Train at 60 km/h. Time to cover 150 km?',opts:['2 hours','2.5 hours','3 hours','1.5 hours'],ans:1,exp:'Time = Distance ÷ Speed = 150 ÷ 60 = 2.5 hours. You can verify: in 2.5 hours at 60 km/h the train covers 60 × 2.5 = 150 km ✓'},
+{sec:'Arithmetic',tag:'tag-ar',pass:null,q:'Simple interest on Rs 5000 at 8% p.a. for 3 years?',opts:['Rs 1,000','Rs 1,200','Rs 1,600','Rs 2,000'],ans:1,exp:'SI = (P × R × T) / 100 = (5000 × 8 × 3) / 100 = 120,000 / 100 = Rs 1,200. Remember: simple interest does not compound — it\'s always calculated on the original principal.'},
+{sec:'Arithmetic',tag:'tag-ar',pass:null,q:'A car travels m miles in h hours. Miles in 90 minutes?',opts:['3m/(2h)','3h/(2m)','90mh','45mh'],ans:0,exp:'Speed = m/h miles per hour. 90 minutes = 1.5 hours = 3/2 hours. Distance = speed × time = (m/h) × (3/2) = 3m/(2h). So the answer is 3m/2h.'},
+{sec:'Analytical',tag:'tag-an',pass:null,q:'All managers are leaders. Some leaders are visionaries. Can we conclude all managers are visionaries?',opts:['Yes, definitely','No, not necessarily','Only some managers','Cannot determine'],ans:1,exp:'This is a logic trap. Just because all managers are leaders, and some leaders are visionaries, we cannot conclude all managers are visionaries. The "some leaders" who are visionaries may or may not overlap with managers. A Venn diagram makes this clear: managers ⊂ leaders, but visionaries only partially overlap leaders — that partial overlap may miss managers entirely.'}
+]
+};
+
+const LTRS=['A','B','C','D'];
+const SEC_COLOR={'English':'var(--color-text-info)','Mathematics':'var(--color-text-warning)','Physics':'var(--color-text-success)','Arithmetic':'#7c3aed','Analytical':'var(--color-text-danger)'};
+
+let qs=[],ua=[],cur=0,timerInt=null,tLeft=1800,tUsed=0,submitted=false;
+
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
+
+function startTest(){
+  const prog=document.getElementById('prog-sel').value;
+  qs=QB[prog];ua=new Array(qs.length).fill(null);cur=0;tLeft=1800;tUsed=0;submitted=false;
+  buildGrid();
+  document.getElementById('p-tot').textContent=qs.length+' total';
+  showScreen('s-test');
+  renderQ();
+  clearInterval(timerInt);
+  timerInt=setInterval(()=>{
+    tLeft--;tUsed++;
+    const m=Math.floor(tLeft/60),s=tLeft%60;
+    const td=document.getElementById('timer');
+    td.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+    if(tLeft<=300)td.classList.add('warn');
+    if(tLeft<=0){clearInterval(timerInt);submitTest();}
+  },1000);
+}
+
+function renderQ(){
+  const q=qs[cur],ans=ua[cur];
+  const wasWrong=submitted&&ans!==null&&ans!==q.ans;
+  const wasSkipped=submitted&&ans===null;
+  const showExpl=submitted&&(wasWrong||wasSkipped);
+
+  let h=`<div class="q-header"><span class="tag ${q.tag}">${q.sec}</span><span class="q-num">Q ${cur+1} / ${qs.length}</span></div>`;
+  if(q.pass)h+=`<div class="passage">${q.pass}</div>`;
+  h+=`<div class="q-text">${q.q}</div><div class="opts">`;
+
+  q.opts.forEach((o,i)=>{
+    let cls='opt';
+    if(submitted){
+      if(i===q.ans)cls+=' correct';
+      else if(ans===i)cls+=' wrong';
+    } else {
+      if(ans===i)cls+=' selected';
+    }
+    h+=`<div class="${cls}" ${submitted?'':'onclick="pick('+i+')"'}><span class="opt-ltr">${LTRS[i]}</span>${o}</div>`;
+  });
+  h+=`</div>`;
+
+  if(showExpl){
+    h+=`<div class="explanation show"><div class="expl-label">Why ${LTRS[q.ans]} is correct</div>${q.exp}</div>`;
+  } else if(submitted&&ans===q.ans){
+    h+=`<div class="explanation show" style="background:var(--color-background-success);border-color:var(--color-border-success);color:var(--color-text-success)"><div class="expl-label">Correct!</div>${q.exp}</div>`;
+  }
+
+  document.getElementById('q-card').innerHTML=h;
+  document.getElementById('btn-prev').disabled=cur===0;
+  document.getElementById('btn-next').disabled=cur===qs.length-1;
+  document.getElementById('btn-skip').style.display=submitted?'none':'';
+  document.getElementById('btn-submit').style.display=submitted?'none':'';
+  updGrid();updProg();
+}
+
+function pick(i){ua[cur]=i;renderQ();}
+function nav(d){const n=cur+d;if(n>=0&&n<qs.length){cur=n;renderQ();}}
+function skip(){if(cur<qs.length-1){cur++;renderQ();}}
+function jumpTo(i){cur=i;renderQ();}
+
+function buildGrid(){
+  const g=document.getElementById('q-grid');g.innerHTML='';
+  qs.forEach((_,i)=>{const d=document.createElement('div');d.className='qdot';d.textContent=i+1;d.onclick=()=>jumpTo(i);g.appendChild(d);});
+}
+
+function updGrid(){
+  document.querySelectorAll('.qdot').forEach((d,i)=>{
+    d.className='qdot';
+    if(submitted){
+      if(ua[i]===qs[i].ans)d.classList.add('correct');
+      else if(ua[i]!==null)d.classList.add('wrong');
+      else d.classList.add('skipped');
+    } else {
+      if(i===cur)d.classList.add('current');
+      else if(ua[i]!==null)d.classList.add('answered');
+    }
+  });
+}
+
+function updProg(){
+  const a=ua.filter(x=>x!==null).length;
+  document.getElementById('pbar').style.width=Math.round(a/qs.length*100)+'%';
+  document.getElementById('p-ans').textContent=a+' answered';
+}
+
+function confirmSubmit(){
+  const u=ua.filter(x=>x===null).length;
+  if(u>0&&!confirm(`You have ${u} unanswered question(s). Submit anyway?`))return;
+  submitTest();
+}
+
+function submitTest(){
+  clearInterval(timerInt);submitted=true;
+  let correct=0,wrong=0,skip=0;
+  const ss={};
+  qs.forEach((q,i)=>{
+    if(!ss[q.sec])ss[q.sec]={c:0,t:0};ss[q.sec].t++;
+    if(ua[i]===null)skip++;
+    else if(ua[i]===q.ans){correct++;ss[q.sec].c++;}
+    else wrong++;
+  });
+  const score=Math.round(correct/qs.length*100);
+  const um=Math.floor(tUsed/60),us=tUsed%60;
+  const merit=((0.85*0.15)+(0.80*0.35)+(score/100*0.50))*100;
+  const icon=score>=70?'🏆':score>=50?'📘':'📖';
+  const title=score>=70?'Excellent!':score>=50?'Good effort!':'Keep practicing!';
+
+  let bars='';
+  Object.entries(ss).forEach(([n,v])=>{
+    const p=Math.round(v.c/v.t*100);
+    bars+=`<div class="sb-row"><span class="sb-lbl">${n}</span><div class="sb-wrap"><div class="sb-bar" style="width:${p}%;background:${SEC_COLOR[n]||'var(--color-text-secondary)'}"></div></div><span class="sb-num">${v.c}/${v.t}</span></div>`;
+  });
+
+  document.getElementById('result-content').innerHTML=`
+    <div class="badge-row"><span class="badge-icon">${icon}</span><div class="badge-title">${title}</div><div class="badge-sub">${correct} correct · ${wrong} wrong · ${skip} skipped</div></div>
+    <div class="score-big">${score}</div><div class="score-den">out of 100</div>
+    <div class="score-row">
+      <div class="sc"><div class="sc-val" style="color:var(--color-text-success)">${correct}</div><div class="sc-lbl">Correct</div></div>
+      <div class="sc"><div class="sc-val" style="color:var(--color-text-danger)">${wrong}</div><div class="sc-lbl">Wrong</div></div>
+      <div class="sc"><div class="sc-val" style="color:var(--color-text-warning)">${skip}</div><div class="sc-lbl">Skipped</div></div>
+      <div class="sc"><div class="sc-val" style="color:var(--color-text-info)">${String(um).padStart(2,'0')}:${String(us).padStart(2,'0')}</div><div class="sc-lbl">Time used</div></div>
+    </div>
+    <div class="merit-box">
+      <h3>Estimated aggregate merit</h3>
+      <div class="merit-formula">Matric 85% × 15% + FSc 80% × 35% + Entry Test × 50%</div>
+      <div class="merit-val">${merit.toFixed(1)}%</div>
+    </div>
+    <div style="margin:12px 0"><div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:8px;font-weight:500">Section performance</div>${bars}</div>
+    <div class="review-hint">Click "Review answers" to go through each question with full explanations for every wrong or skipped answer.</div>
+    <div class="res-actions">
+      <button onclick="reviewMode()">Review answers</button>
+      <button onclick="resetTest()">Try again</button>
+    </div>`;
+  showScreen('s-result');updGrid();
+}
+
+function reviewMode(){cur=0;showScreen('s-test');renderQ();}
+function resetTest(){clearInterval(timerInt);document.getElementById('timer').classList.remove('warn');showScreen('s-welcome');}
+</script>
